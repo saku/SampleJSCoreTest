@@ -16,13 +16,13 @@ class MyLibraryJSCoreTest: XCTestCase {
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        if let path = NSBundle.mainBundle().pathForResource("handlebars-v4.0.5", ofType: "js", inDirectory: "www/js") {
-            let script = try! String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-            context.evaluateScript(script)
+        if let path = Bundle.main.path(forResource: "handlebars-v4.0.5", ofType: "js", inDirectory: "www/js") {
+            let script = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
+            context?.evaluateScript(script)
         }
-        if let path = NSBundle.mainBundle().pathForResource("handlebars-helper", ofType: "js", inDirectory: "www/js") {
-            let script = try! String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-            context.evaluateScript(script)
+        if let path = Bundle.main.path(forResource: "handlebars-helper", ofType: "js", inDirectory: "www/js") {
+            let script = try! String(contentsOfFile: path, encoding: String.Encoding.utf8)
+            context?.evaluateScript(script)
         }
     }
     
@@ -38,16 +38,16 @@ class MyLibraryJSCoreTest: XCTestCase {
         var params, value : String
 
         params = "var params = { value : true };"
-        context.evaluateScript(script)
-        context.evaluateScript(params)
-        context.evaluateScript("var template = Handlebars.compile(source);")
-        value = context.evaluateScript("template(params);").toString()
+        context?.evaluateScript(script)
+        context?.evaluateScript(params)
+        context?.evaluateScript("var template = Handlebars.compile(source);")
+        value = (context?.evaluateScript("template(params);").toString())!
         assert(value == "foo", "check library value.")
 
         params = "var params = { value : false };"
-        context.evaluateScript(params)
-        context.evaluateScript("template = Handlebars.compile(source);")
-        value = context.evaluateScript("template(params);").toString()
+        context?.evaluateScript(params)
+        context?.evaluateScript("template = Handlebars.compile(source);")
+        value = (context?.evaluateScript("template(params);").toString())!
         assert(value == "bar", "check 3rd library value.")
     }
 
@@ -66,15 +66,15 @@ class MyLibraryJSCoreTest: XCTestCase {
         _coreMyLibraryTest("'example'", condition: "!=", right: "'sample'", expect: true)
     }
     
-    func _coreMyLibraryTest(left : String, condition: String, right: String, expect:Bool) {
+    func _coreMyLibraryTest(_ left : String, condition: String, right: String, expect:Bool) {
         let script = "var source = '{{#ifCond left \"\(condition)\" right}}foo{{else}}bar{{/ifCond}}';"
         var params, value : String
         
         params = "var params = { left : \(left), right : \(right) };"
-        context.evaluateScript(script)
-        context.evaluateScript(params)
-        context.evaluateScript("var template = Handlebars.compile(source);")
-        value = context.evaluateScript("template(params);").toString()
+        context?.evaluateScript(script)
+        context?.evaluateScript(params)
+        context?.evaluateScript("var template = Handlebars.compile(source);")
+        value = (context?.evaluateScript("template(params);").toString())!
         assert((value == "foo") == expect, "check my library value.")
     }
 }

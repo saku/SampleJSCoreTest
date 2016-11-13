@@ -26,16 +26,16 @@ class SimpleJSCoreTest: XCTestCase {
     func testSimpleValue() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        context.evaluateScript("var source = '3';")
-        let value = context.evaluateScript("source;").toInt32()
+        context?.evaluateScript("var source = '3';")
+        let value = context?.evaluateScript("source;").toInt32()
         assert(value == 3, "check var value.")
     }
 
     func testSimpleFunction() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
-        context.evaluateScript("function testFunc(variable) { var num = Number(variable); return num + 1; }")
-        let value = context.evaluateScript("testFunc(5);").toInt32()
+        context?.evaluateScript("function testFunc(variable) { var num = Number(variable); return num + 1; }")
+        let value = context?.evaluateScript("testFunc(5);").toInt32()
         
         assert(value == 6, "check function value.")
     }
