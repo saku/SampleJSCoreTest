@@ -42,13 +42,13 @@ class MyLibraryJSCoreTest: XCTestCase {
         context?.evaluateScript(params)
         context?.evaluateScript("var template = Handlebars.compile(source);")
         value = (context?.evaluateScript("template(params);").toString())!
-        assert(value == "foo", "check library value.")
+        XCTAssert(value == "foo", "check library value.")
 
         params = "var params = { value : false };"
         context?.evaluateScript(params)
         context?.evaluateScript("template = Handlebars.compile(source);")
         value = (context?.evaluateScript("template(params);").toString())!
-        assert(value == "bar", "check 3rd library value.")
+        XCTAssert(value == "bar", "check 3rd library value.")
     }
 
     func testMyLibraryTest() {
@@ -75,6 +75,6 @@ class MyLibraryJSCoreTest: XCTestCase {
         context?.evaluateScript(params)
         context?.evaluateScript("var template = Handlebars.compile(source);")
         value = (context?.evaluateScript("template(params);").toString())!
-        assert((value == "foo") == expect, "check my library value.")
+        XCTAssert((value == "foo") == expect, "check my library value.")
     }
 }
