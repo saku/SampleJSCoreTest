@@ -38,12 +38,12 @@ class ThirdLibraryJSCoreTest: XCTestCase {
         context.evaluateScript(params)
         context.evaluateScript("var template = Handlebars.compile(source);")
         value = context.evaluateScript("template(params);").toString()
-        assert(value == "foo", "check library value.")
+        XCTAssert(value == "foo", "check library value.")
         
         params = "var params = { value : false };"
         context.evaluateScript(params)
         context.evaluateScript("template = Handlebars.compile(source);")
         value = context.evaluateScript("template(params);").toString()
-        assert(value == "bar", "check library value.")
+        XCTAssert(value == "bar", "check library value.")
     }
 }
